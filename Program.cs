@@ -1,4 +1,13 @@
+using BookStoreApi.Services;
+using DPOBackend.Settings;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.Configure<TestSettings>(
+    builder.Configuration.GetSection("TestStoreDatabase"));
+
+builder.Services.AddSingleton<TestService>();
 
 // Add services to the container.
 
