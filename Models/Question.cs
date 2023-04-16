@@ -1,30 +1,23 @@
-﻿namespace DPOBackend.Models;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-public abstract class Question
-{
-    public int id;
-    public QuestionType type;
-}
+namespace DPOBackend.Models;
 
-public class SingleQuestion : Question
+public class Question
 {
-    public QuestionType type = QuestionType.SINGLE;
-    public List<string> possibleAnswers;
-    public string anser;
-    public string rightAnswer;
-}
-
-public class ManyQuestions : Question
-{
-    public QuestionType type = QuestionType.MANY;
-    public List<string> possibleAnswers;
-    public List<string> answer;
-    public List<string> rightAnswer;
-}
-
-public class FreeQuestions : Question
-{
-    public QuestionType type = QuestionType.FREE;
-    public string answer;
-    public string rightAnswer;
+    [BsonId]
+    public int Id { get; set; }
+    
+    [BsonElement("Type")]
+    [BsonRepresentation(BsonType.String)]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public QuestionType Type { get; set; }
+    
+    [BsonElement("PossibleAnswers")]
+    public string[] PossibleAnswers{ get; set; }
+    
+    [BsonElement("RightAnswers")]
+    public string[] RightAnswers{ get; set; }
 }

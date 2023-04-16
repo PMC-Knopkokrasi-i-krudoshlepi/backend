@@ -1,16 +1,28 @@
-﻿namespace DPOBackend.Models;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-public class CourseTestModel
+namespace DPOBackend.Models;
+
+public class TestModel
 {
-    public int id;
-    public string name;
-    public string description;
-    public List<int> linkedCoursesIds;
-    public List<Question> questionsList;
+    [BsonId]
+    public int Id{ get; set; }
+    
+    [BsonElement("Name")]
+    public string Name{ get; set; }
+    
+    [BsonElement("Description")]
+    public string Description{ get; set; }
+    
+    [BsonElement("LinkedCoursesIds")]
+    public List<int> LinkedCoursesIds{ get; set; }
+    
+    [BsonElement("QuestionsList")]
+    public List<Question> QuestionsList{ get; set; }
 
 }
 
-public class PersonalityTestModel
+/*public class PersonalityTestModel
 {
     public int id;
     public string name;
@@ -18,5 +30,5 @@ public class PersonalityTestModel
     
     public List<Question> questionsList;
 
-}
+}*/
 

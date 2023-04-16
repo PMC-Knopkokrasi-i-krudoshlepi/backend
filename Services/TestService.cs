@@ -7,7 +7,7 @@ namespace BookStoreApi.Services;
 
 public class TestService
 {
-    private readonly IMongoCollection<TestModel> _booksCollection;
+    private readonly IMongoCollection<TestModel> _testsCollection;
 
     public TestService(
         IOptions<TestSettings> bookStoreDatabaseSettings)
@@ -18,22 +18,22 @@ public class TestService
         var mongoDatabase = mongoClient.GetDatabase(
             bookStoreDatabaseSettings.Value.DatabaseName);
 
-        _booksCollection = mongoDatabase.GetCollection<TestModel>(
+        _testsCollection = mongoDatabase.GetCollection<TestModel>(
             bookStoreDatabaseSettings.Value.BooksCollectionName);
     }
 
     public async Task<List<TestModel>> GetAsync() =>
-        await _booksCollection.Find(_ => true).ToListAsync();
+        await _testsCollection.Find(_ => true).ToListAsync();
 
-    public async Task<TestModel?> GetAsync(string id) =>
-        await _booksCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+    public async Task<TestModel?> GetAsync(int id) =>
+        await _testsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(TestModel newBook) =>
-        await _booksCollection.InsertOneAsync(newBook);
+    public async Task CreateAsync(TestModel newTest) =>
+        await _testsCollection.InsertOneAsync(newTest);
 
-    public async Task UpdateAsync(string id, TestModel updatedBook) =>
-        await _booksCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
+    public async Task UpdateAsync(int id, TestModel updatedBook) =>
+        await _testsCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
 
-    public async Task RemoveAsync(string id) =>
-        await _booksCollection.DeleteOneAsync(x => x.Id == id);
+    public async Task RemoveAsync(int id) =>
+        await _testsCollection.DeleteOneAsync(x => x.Id == id);
 }
