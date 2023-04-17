@@ -5,8 +5,14 @@ using Newtonsoft.Json.Converters;
 
 namespace DPOBackend.Models;
 
-public class Question
+public class QuestionWithoutAnswers
 {
+    public QuestionWithoutAnswers(Question question)
+    {
+        Type = question.Type;
+        PossibleAnswers = question.PossibleAnswers;
+    }
+
     [BsonElement("Type")]
     [BsonRepresentation(BsonType.String)]
     [JsonConverter(typeof(StringEnumConverter))]
@@ -14,7 +20,4 @@ public class Question
     
     [BsonElement("PossibleAnswers")]
     public string[] PossibleAnswers{ get; set; }
-    
-    [BsonElement("RightAnswers")]
-    public string[] RightAnswers{ get; set; }
 }

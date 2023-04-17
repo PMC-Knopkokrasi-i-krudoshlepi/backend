@@ -27,6 +27,9 @@ public class TestService
 
     public async Task<TestModel?> GetAsync(int id) =>
         await _testsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+    
+    public async Task<TestModel?> GetAsyncWithoutAnswers(int id) =>
+        await _testsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
     public async Task CreateAsync(TestModel newTest) =>
         await _testsCollection.InsertOneAsync(newTest);

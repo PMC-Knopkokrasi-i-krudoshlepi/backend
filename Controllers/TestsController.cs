@@ -12,7 +12,7 @@ public class TestsController : ControllerBase
     public async Task<IActionResult> GetTestById([FromServices] TestService service,[FromRoute]int id)
     {
         var t = await service.GetAsync(id);
-        return Ok(t);
+        return Ok(new TestToFront(t));//TODO: переделать
     }
     
     [HttpPost]
