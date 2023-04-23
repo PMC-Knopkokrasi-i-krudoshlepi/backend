@@ -1,6 +1,7 @@
 ﻿using DPOBackend.Models;
 using DPOBackend.Settings;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace BookStoreApi.Services;
@@ -33,10 +34,21 @@ public class TestService
 
     public async Task CreateAsync(TestModel newTest) =>
         await _testsCollection.InsertOneAsync(newTest);
+    
 
     public async Task UpdateAsync(int id, TestModel updatedBook) =>
         await _testsCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
 
     public async Task RemoveAsync(int id) =>
         await _testsCollection.DeleteOneAsync(x => x.Id == id);
+
+    public async Task<bool> TryUpdateImageIds(int id, ObjectId[] objectIds)
+    {
+        var t = await GetAsync(id);
+        if (t is null)
+            return false;
+        t.UpdateImageIds(objectIds);
+        await UpdateAsync(id, t);
+        return true;
+    }
 }

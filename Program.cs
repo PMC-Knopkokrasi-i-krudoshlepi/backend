@@ -6,8 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.Configure<TestSettings>(
     builder.Configuration.GetSection("TestStoreDatabase"));
+builder.Services.Configure<ImageServiceSettings>(
+    builder.Configuration.GetSection("ImageServiceDatabase"));
 
 builder.Services.AddSingleton<TestService>();
+builder.Services.AddSingleton<ImageService>();
 
 // Add services to the container.
 

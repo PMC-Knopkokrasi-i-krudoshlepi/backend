@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iD0USQbiLTS8AerV1UgBExZ1bj9QyavSpXwK5NBGBQhZF0hz88kBeCF7paj54mhHPOgGJxVVrmGiw8TjeY+IxQ==",
+  "dgSpecHash": "M9nF+XzaK2rqAS1AnnE118d4FFIPZri1nwVtJ98/0P857GIOskF7CZiLFFqnScf+BDvS8XMsCTSFPULoQ8+XDw==",
   "success": true,
   "projectFilePath": "D:\\c# projects\\.NET Projects\\backend\\DPOBackend.csproj",
   "expectedPackageFiles": [
@@ -28,6 +28,7 @@
     "C:\\Users\\1\\.nuget\\packages\\mongodb.bson\\2.19.1\\mongodb.bson.2.19.1.nupkg.sha512",
     "C:\\Users\\1\\.nuget\\packages\\mongodb.driver\\2.19.1\\mongodb.driver.2.19.1.nupkg.sha512",
     "C:\\Users\\1\\.nuget\\packages\\mongodb.driver.core\\2.19.1\\mongodb.driver.core.2.19.1.nupkg.sha512",
+    "C:\\Users\\1\\.nuget\\packages\\mongodb.driver.gridfs\\2.19.1\\mongodb.driver.gridfs.2.19.1.nupkg.sha512",
     "C:\\Users\\1\\.nuget\\packages\\mongodb.libmongocrypt\\1.7.0\\mongodb.libmongocrypt.1.7.0.nupkg.sha512",
     "C:\\Users\\1\\.nuget\\packages\\newtonsoft.json\\9.0.1\\newtonsoft.json.9.0.1.nupkg.sha512",
     "C:\\Users\\1\\.nuget\\packages\\sharpcompress\\0.30.1\\sharpcompress.0.30.1.nupkg.sha512",

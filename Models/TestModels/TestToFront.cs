@@ -10,7 +10,7 @@ public class TestToFront
         Name = test.Name;
         Description = test.Description;
         LinkedCoursesIds = test.LinkedCoursesIds;
-        QuestionsList = test.QuestionsList.Select(q => new QuestionWithoutAnswers(q)).ToList();
+        QuestionsList = test.QuestionsList.Select(q => new QuestionToFront(q)).ToList();
     }
     
     public int Id{ get; set; }
@@ -21,5 +21,5 @@ public class TestToFront
     
     public List<int> LinkedCoursesIds{ get; set; }
     
-    public List<QuestionWithoutAnswers> QuestionsList{ get; set; }
+    public List<QuestionToFront> QuestionsList{ get; set; }
 }
