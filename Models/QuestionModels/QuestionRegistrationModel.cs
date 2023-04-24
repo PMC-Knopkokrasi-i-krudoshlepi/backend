@@ -8,5 +8,5 @@ public class QuestionRegistrationModel
     
     public string[] RightAnswers{ get; set; }
     
-    public bool HaveImage{ get; set; }
+    public ContentType ContentType { get; set; }
 }

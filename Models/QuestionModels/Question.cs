@@ -7,12 +7,13 @@ namespace DPOBackend.Models;
 
 public class Question
 {
-    public Question(QuestionType argType, string[] argPossibleAnswers, string[] argRightAnswers, ObjectId objectId)
+    public Question(QuestionType argType, string[] argPossibleAnswers, string[] argRightAnswers, ContentType contentType, ObjectId objectId)
     {
         Type = argType;
         PossibleAnswers = argPossibleAnswers;
-        RightAnswers = RightAnswers;
-        ImageId = objectId;
+        RightAnswers = argRightAnswers;
+        ContentType = contentType;
+        ContentId = objectId;
     }
 
     [BsonElement("Type")]
@@ -26,6 +27,9 @@ public class Question
     [BsonElement("RightAnswers")]
     public string[] RightAnswers{ get; set; }
     
-    [BsonElement("ImageId")]
-    public ObjectId ImageId{ get; set; }
+    [BsonElement("ContentType")]
+    public ContentType ContentType { get; set; }
+
+    [BsonElement("ContentId")]
+    public ObjectId ContentId{ get; set; }
 }
