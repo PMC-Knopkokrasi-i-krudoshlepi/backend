@@ -1,5 +1,6 @@
 ﻿using BookStoreApi.Services;
 using DPOBackend.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
@@ -10,6 +11,7 @@ namespace DPOBackend.Controllers;
 public class TestsController : ControllerBase
 {
     [HttpGet("{id}")]
+    [EnableCors(policyName: "AllowAll")]
     public async Task<IActionResult> GetTestById(
         [FromServices] TestService service,
         [FromServices] ImageService imageService,
@@ -18,7 +20,21 @@ public class TestsController : ControllerBase
         var t = await service.GetAsync(id);
         return Ok(new TestToFront(t));//TODO: переделать
     }
-    
+
+    [HttpPost("result/{id}")]
+    public async Task<IActionResult> GetTestResult(
+        [FromRoute] int id,
+        [FromBody] string[][] answers, 
+        [FromServices] TestService service)
+    {
+        var t = await service.GetTestResult(id, answers);
+        return Ok(new
+        {
+            rightAnswers = t.Item1,
+            questionCount = t.Item2
+        });
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateTest(
         [FromServices] TestService service,

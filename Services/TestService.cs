@@ -1,5 +1,6 @@
 ﻿using DPOBackend.Models;
 using DPOBackend.Settings;
+using Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -51,4 +52,14 @@ public class TestService
         await UpdateAsync(id, t);
         return true;
     }
+
+    public async Task<(int, int)> GetTestResult(int id, string[][] answers) => 
+        await Task.Run(async () =>
+        {
+            var test = await GetAsync(id);
+            if (test is null)
+                return (0, 0);//TODO: cringe
+            return (await test.GetRightAnswerCount(answers),test.Count);
+        }
+    );
 }
