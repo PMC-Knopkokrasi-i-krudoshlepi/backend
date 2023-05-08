@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using BookStoreApi.Services;
 using DPOBackend.Models;
+using DPOBackend.Models.UserModels;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -68,7 +69,10 @@ public class AccountController : ControllerBase
     
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register()
+    public async Task<IActionResult> Register([FromBody] UserModel user, [FromServices] UserService service)
     {
+        var response = service.CreateAsync(user);
+        return Ok(response);
     }
 }
+

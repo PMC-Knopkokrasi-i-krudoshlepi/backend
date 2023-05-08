@@ -51,3 +51,13 @@ D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\runtimes\osx\native\libmon
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\MongoDB.Driver.GridFS.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.csproj.AssemblyReference.cache
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.AssemblyInfoInputs.cache
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.AssemblyInfo.cs
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.csproj.CoreCompileInputs.cache
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\refint\DPOBackend.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.pdb
