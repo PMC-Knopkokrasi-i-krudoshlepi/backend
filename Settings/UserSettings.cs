@@ -1,6 +1,6 @@
 ﻿namespace DPOBackend.Settings;
 
-public class TestSettings
+public class UserSettings
 {
     public string ConnectionString { get; set; } = null!;
 

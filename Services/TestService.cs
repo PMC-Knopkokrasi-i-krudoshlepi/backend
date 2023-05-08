@@ -21,7 +21,7 @@ public class TestService
             bookStoreDatabaseSettings.Value.DatabaseName);
 
         _testsCollection = mongoDatabase.GetCollection<TestModel>(
-            bookStoreDatabaseSettings.Value.BooksCollectionName);
+            bookStoreDatabaseSettings.Value.CollectionName);
     }
 
     public async Task<List<TestModel>> GetAsync() =>
