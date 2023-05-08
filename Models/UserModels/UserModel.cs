@@ -15,4 +15,12 @@ public class UserModel
     
     [BsonElement("Role")]
     public UserRole Role{ get; set; }
+
+    public UserModel(int id, string name, string password, UserRole role)
+    {
+        Id = id;
+        Name = name;
+        Password = password;
+        Role = role;
+    }
 }
