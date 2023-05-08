@@ -36,4 +36,9 @@ public class UserService
 
     public async Task RemoveAsync(int id) =>
         await _testsCollection.DeleteOneAsync(x => x.Id == id);
+
+    public async Task<UserModel> GetByNameAndPassword(string name, string password)
+    {
+        throw new NotImplementedException();
+    }
 }
