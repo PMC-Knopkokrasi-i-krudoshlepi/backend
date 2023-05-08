@@ -10,16 +10,18 @@ namespace DPOBackend.Controllers;
 [Route("api/account")]
 public class AccountController : ControllerBase
 {
-    [HttpGet("{id}")]
+    [HttpGet("login")]
     [EnableCors(policyName: "AllowAll")]
-    public async Task<IActionResult> Login([FromServices] UserService service)
+    public async Task<IActionResult> Login(
+        [FromServices] UserService service,
+        [FromQuery] string name,
+        [FromQuery] string password)
     {
-        var t = await service.GetAsync(id);
-        return Ok(new TestToFront(t));//TODO: переделать
+        throw new Exception();
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> GetTestResult()
+    public async Task<IActionResult> Register()
     {
     }
 }
