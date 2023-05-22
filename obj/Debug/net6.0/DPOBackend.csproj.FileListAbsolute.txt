@@ -61,3 +61,11 @@ C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBa
 C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.dll
 C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\refint\DPOBackend.dll
 C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.pdb
+D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

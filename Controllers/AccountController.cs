@@ -71,8 +71,8 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserModel user, [FromServices] UserService service)
     {
-        var response = service.CreateAsync(user);
-        return Ok(response);
+        await service.CreateAsync(user); //TODO: TryCreate()
+        return Ok();
     }
 }
 

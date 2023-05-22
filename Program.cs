@@ -11,7 +11,7 @@ builder.Services.Configure<TestSettings>(
     builder.Configuration.GetSection("TestStoreDatabase"));
 builder.Services.Configure<ImageServiceSettings>(
     builder.Configuration.GetSection("ImageServiceDatabase"));
-builder.Services.Configure<ImageServiceSettings>(
+builder.Services.Configure<UserSettings>(
     builder.Configuration.GetSection("UserServiceDatabase"));
 
 builder.Services.AddSingleton<TestService>();
