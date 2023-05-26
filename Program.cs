@@ -39,22 +39,28 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
+            // укзывает, будет ли валидироваться издатель при валидации токена
             ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
+            // строка, представляющая издателя
             ValidIssuer = AuthOptions.ISSUER,
+ 
+            // будет ли валидироваться потребитель токена
+            ValidateAudience = true,
+            // установка потребителя токена
             ValidAudience = AuthOptions.AUDIENCE,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AuthOptions.KEY)),
+            // будет ли валидироваться время существования
+            ValidateLifetime = false,
+ 
+            // установка ключа безопасности
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            // валидация ключа безопасности
+            ValidateIssuerSigningKey = true,
         };
     });
 
@@ -71,6 +77,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
+
 
 app.UseAuthentication();
 app.UseAuthorization();

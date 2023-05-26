@@ -1,5 +1,6 @@
 ﻿using BookStoreApi.Services;
 using DPOBackend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -10,6 +11,7 @@ namespace DPOBackend.Controllers;
 [Route("api/tests")]
 public class TestsController : ControllerBase
 {
+    [Authorize]
     [HttpGet("{id}")]
     [EnableCors(policyName: "AllowAll")]
     public async Task<IActionResult> GetTestById(

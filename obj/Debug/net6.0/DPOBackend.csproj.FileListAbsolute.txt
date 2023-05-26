@@ -8,14 +8,8 @@ D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\DPOBackend.pdb
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
-D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
-D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
-D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
-D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
-D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.OpenApi.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -115,3 +109,4 @@ D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Pr
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll

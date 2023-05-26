@@ -45,9 +45,16 @@ public class AccountController : ControllerBase
             new Claim(ClaimTypes.Name, user.Name),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         };
-        var token = new JwtSecurityToken(AuthOptions.ISSUER, AuthOptions.AUDIENCE, claims,
-            expires: DateTime.Now.AddMinutes(15), signingCredentials: credentials);
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        var now = DateTime.UtcNow;
+        // создаем JWT-токен
+        var jwt = new JwtSecurityToken(
+            issuer: AuthOptions.ISSUER,
+            audience: AuthOptions.AUDIENCE,
+            notBefore: now,
+            claims: claims,
+            expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+        return new JwtSecurityTokenHandler().WriteToken(jwt);
     }
     
     private UserModel? Authenticate(UserService service,string username, string password)
