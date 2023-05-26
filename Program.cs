@@ -1,3 +1,4 @@
+using System.Text;
 using BookStoreApi.Services;
 using DPOBackend.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,6 +20,7 @@ builder.Services.AddSingleton<ImageService>();
 builder.Services.AddSingleton<UserService>();
 
 // Add services to the container.
+builder.Services.AddMvc();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -28,7 +30,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "AllowAll",
-        policy  =>
+        policy =>
         {
             policy
                 .WithOrigins("*")
@@ -37,22 +39,22 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
     .AddJwtBearer(options =>
     {
-        options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = AuthOptions.ISSUER,
-            
             ValidateAudience = true,
-            ValidAudience = AuthOptions.AUDIENCE,
-
             ValidateLifetime = true,
-            
-            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
             ValidateIssuerSigningKey = true,
+            ValidIssuer = AuthOptions.ISSUER,
+            ValidAudience = AuthOptions.AUDIENCE,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AuthOptions.KEY)),
         };
     });
 
@@ -70,9 +72,8 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();

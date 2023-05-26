@@ -1,8 +1,10 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using BookStoreApi.Services;
 using DPOBackend.Models;
 using DPOBackend.Models.UserModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -18,61 +20,55 @@ public class AccountController : ControllerBase
     [HttpGet("login")]
     [EnableCors(policyName: "AllowAll")]
     public async Task<IActionResult> Login(
-        [FromServices] UserService service,
+         [FromServices] UserService service,
         [FromQuery] string username,
         [FromQuery] string password)
     {
-        var identity = await GetIdentity(service, username, password);
-        if (identity == null)
+        var user = Authenticate(service,username, password);
+        if (user != null)
         {
-            return BadRequest(new { errorText = "Invalid username or password." });
+            var token = Generate(user);
+            return Ok(token);
         }
- 
-        var now = DateTime.UtcNow;
-        // создаем JWT-токен
-        var jwt = new JwtSecurityToken(
-            issuer: AuthOptions.ISSUER,
-            audience: AuthOptions.AUDIENCE,
-            notBefore: now,
-            claims: identity.Claims,
-            expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-        var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
- 
-        var response = new
+
+
+        return NotFound("User not found");
+    }
+
+    private string Generate(UserModel user)
+    {
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AuthOptions.KEY));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        var claims = new[]
         {
-            access_token = encodedJwt,
-            username = identity.Name
+            new Claim(ClaimTypes.Sid, user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.Role, user.Role.ToString())
         };
- 
-        return Ok(response);
+        var token = new JwtSecurityToken(AuthOptions.ISSUER, AuthOptions.AUDIENCE, claims,
+            expires: DateTime.Now.AddMinutes(15), signingCredentials: credentials);
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
     
-    private async Task<ClaimsIdentity?> GetIdentity(UserService service,string username, string password) =>
-        await Task.Run(async () =>
+    private UserModel? Authenticate(UserService service,string username, string password)
+    {
+        var user = service.GetByNameAndPasswordAsync(username, password);
+        if (user.Result != null)
         {
-            var user = await service.GetByNameAndPassword(username, password);
-            if (user != null)
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name),
-                    //new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
-                };
-                ClaimsIdentity claimsIdentity =
-                    new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                        ClaimsIdentity.DefaultRoleClaimType);
-                return claimsIdentity;
-            }
-            return null;
-        });
+            return user.Result;
+        }
+
+        return null;
+    }
+
     
 
+    [AllowAnonymous]
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] UserModel user, [FromServices] UserService service)
+    public async Task<IActionResult> Register([FromBody] UserModel? user, [FromServices] UserService service)
     {
+        user.Id = (int) service.GetLenthAsync().Result;
         await service.CreateAsync(user); //TODO: TryCreate()
         return Ok();
     }
 }
-

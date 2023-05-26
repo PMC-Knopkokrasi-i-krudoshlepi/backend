@@ -61,6 +61,51 @@ C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBa
 C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.dll
 C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\refint\DPOBackend.dll
 C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.pdb
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\appsettings.json
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\DPOBackend.exe
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\DPOBackend.deps.json
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\DPOBackend.runtimeconfig.json
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\DPOBackend.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\DPOBackend.pdb
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\AWSSDK.Core.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\AWSSDK.SecurityToken.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\DnsClient.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\MongoDB.Bson.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\MongoDB.Driver.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\MongoDB.Driver.Core.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\MongoDB.Driver.GridFS.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\SharpCompress.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Snappier.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\ZstdSharp.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\scopedcss\bundle\DPOBackend.styles.css
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.csproj.CopyComplete
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\DPOBackend.genruntimeconfig.cache
+C:\Users\volde\OneDrive\Документы\GitHub\backend\obj\Debug\net6.0\ref\DPOBackend.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
@@ -69,3 +114,4 @@ D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Pr
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\c# projects\.NET Projects\backend\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\volde\OneDrive\Документы\GitHub\backend\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll

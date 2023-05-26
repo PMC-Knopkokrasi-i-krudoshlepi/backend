@@ -1,5 +1,6 @@
 ﻿using DPOBackend.Models.UserModels;
 using DPOBackend.Settings;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -7,7 +8,7 @@ namespace BookStoreApi.Services;
 
 public class UserService
 {
-    private readonly IMongoCollection<UserModel> _userCollections;
+    private readonly IMongoCollection<UserModel?> _userCollections;
 
     public UserService(
         IOptions<UserSettings> userStoreDatabaseSettings)
@@ -22,23 +23,24 @@ public class UserService
             userStoreDatabaseSettings.Value.CollectionName);
     }
 
-    public async Task<List<UserModel>> GetAsync() =>
+    public async Task<List<UserModel?>> GetAsync() =>
         await _userCollections.Find(_ => true).ToListAsync();
 
     public async Task<UserModel?> GetAsync(int id) =>
         await _userCollections.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(UserModel newUser) =>
+    public async Task CreateAsync(UserModel? newUser) =>
         await _userCollections.InsertOneAsync(newUser);
-    
-    public async Task UpdateAsync(int id, UserModel updatedUser) =>
+
+    public async Task UpdateAsync(int id, UserModel? updatedUser) =>
         await _userCollections.ReplaceOneAsync(x => x.Id == id, updatedUser);
 
     public async Task RemoveAsync(int id) =>
         await _userCollections.DeleteOneAsync(x => x.Id == id);
 
-    public async Task<UserModel> GetByNameAndPassword(string name, string password)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<UserModel?> GetByNameAndPasswordAsync(string name, string password) =>
+        await _userCollections.Find(model => model.Name == name && model.Password == password).FirstOrDefaultAsync();
+
+    public async Task<long> GetLenthAsync() =>
+        await _userCollections.CountAsync(_ => true);
 }
