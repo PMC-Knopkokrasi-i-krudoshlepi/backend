@@ -11,12 +11,10 @@ namespace DPOBackend.Controllers;
 [Route("api/tests")]
 public class TestsController : ControllerBase
 {
-    [Authorize]
     [HttpGet("{id}")]
     [EnableCors(policyName: "AllowAll")]
     public async Task<IActionResult> GetTestById(
         [FromServices] TestService service,
-        [FromServices] ImageService imageService,
         [FromRoute]int id)
     {
         var t = await service.GetAsync(id);
@@ -47,7 +45,7 @@ public class TestsController : ControllerBase
         return Ok(t.Id);
     }
     
-    [HttpPost("{id}/data")]
+    /*[HttpPost("{id}/data")]
     public async Task<IActionResult> LoadData(
         [FromServices] TestService testService,
         [FromServices] ImageService imageService,
@@ -58,5 +56,5 @@ public class TestsController : ControllerBase
         if (isSucced)
             return Ok();
         return NotFound();
-    }
+    }*/
 }

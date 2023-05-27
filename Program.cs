@@ -8,18 +8,14 @@ using TokenApp;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.Configure<TestSettings>(
-    builder.Configuration.GetSection("TestStoreDatabase"));
-builder.Services.Configure<ImageServiceSettings>(
+/*builder.Services.Configure<ImageServiceSettings>(
     builder.Configuration.GetSection("ImageServiceDatabase"));
-builder.Services.Configure<UserSettings>(
-    builder.Configuration.GetSection("UserServiceDatabase"));
 
-builder.Services.AddSingleton<TestService>();
-builder.Services.AddSingleton<ImageService>();
-builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<ImageService>();*/
 
 // Add services to the container.
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TestService>();
 builder.Services.AddMvc();
 
 builder.Services.AddControllers();
@@ -68,18 +64,21 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+/*if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+}*/
 
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
+
+//app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
 
 
-app.UseAuthentication();
+//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

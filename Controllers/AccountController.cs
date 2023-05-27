@@ -72,9 +72,10 @@ public class AccountController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] UserModel? user, [FromServices] UserService service)
+    public async Task<IActionResult> Register([FromBody] UserRegisttrationModel? urm, [FromServices] UserService service)
     {
-        user.Id = (int) service.GetLenthAsync().Result;
+        var uid = (int) service.GetLenthAsync().Result + 1;
+        var user = new UserModel(uid, urm);
         await service.CreateAsync(user); //TODO: TryCreate()
         return Ok();
     }

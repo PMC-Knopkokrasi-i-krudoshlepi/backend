@@ -1,49 +1,65 @@
-﻿using DPOBackend.Models;
+﻿using DPOBackend.Db;
+using DPOBackend.Models;
 using DPOBackend.Settings;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using TestModel = DPOBackend.Models.TestModel;
 
 namespace BookStoreApi.Services;
 
 public class TestService
 {
-    private readonly IMongoCollection<TestModel> _testsCollection;
+    public TestService() { }
 
-    public TestService(
-        IOptions<TestSettings> bookStoreDatabaseSettings)
+    public async Task<TestModel?> GetAsync(int id)
     {
-        var mongoClient = new MongoClient(
-            bookStoreDatabaseSettings.Value.ConnectionString);
+        TestModel? result;
+        using (var ctx = new TestDbContext())
+        {
+            result = await ctx.Tests
+                .Include(test => test.QuestionsList)
+                .FirstOrDefaultAsync();
+        }
 
-        var mongoDatabase = mongoClient.GetDatabase(
-            bookStoreDatabaseSettings.Value.DatabaseName);
+        return result;
+    }
+    
+    /*public async Task<TestModel?> GetAsyncWithoutAnswers(int id) =>
+        await _testsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();*/
 
-        _testsCollection = mongoDatabase.GetCollection<TestModel>(
-            bookStoreDatabaseSettings.Value.CollectionName);
+    public async Task CreateAsync(TestModel newTest){
+        using (var ctx = new TestDbContext())
+        {
+            await ctx.Questions.AddRangeAsync(newTest.QuestionsList);
+            ctx.Tests.Add(newTest);
+            await ctx.SaveChangesAsync();
+        }
+    }
+    
+
+    public async Task UpdateAsync(int id, TestModel updatedBook){
+        using (var ctx = new TestDbContext())
+        {
+            var prev = await ctx.Tests.FirstOrDefaultAsync(t => t.Id == id);
+            ctx.Tests.Remove(prev);
+            ctx.Tests.Add(updatedBook);
+            await ctx.SaveChangesAsync();
+        }
     }
 
-    public async Task<List<TestModel>> GetAsync() =>
-        await _testsCollection.Find(_ => true).ToListAsync();
+    public async Task RemoveAsync(int id){
+        using (var ctx = new TestDbContext())
+        {
+            var removed = await ctx.Tests.FirstOrDefaultAsync(test => test.Id == id);
+            ctx.Tests.Remove(removed);
+            await ctx.SaveChangesAsync();
+        }
+    }
 
-    public async Task<TestModel?> GetAsync(int id) =>
-        await _testsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-    
-    public async Task<TestModel?> GetAsyncWithoutAnswers(int id) =>
-        await _testsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-
-    public async Task CreateAsync(TestModel newTest) =>
-        await _testsCollection.InsertOneAsync(newTest);
-    
-
-    public async Task UpdateAsync(int id, TestModel updatedBook) =>
-        await _testsCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
-
-    public async Task RemoveAsync(int id) =>
-        await _testsCollection.DeleteOneAsync(x => x.Id == id);
-
-    public async Task<bool> TryUpdateImageIds(int id, ObjectId[] objectIds)
+    /*public async Task<bool> TryUpdateImageIds(int id, ObjectId[] objectIds)
     {
         var t = await GetAsync(id);
         if (t is null)
@@ -51,7 +67,7 @@ public class TestService
         t.UpdateImageIds(objectIds);
         await UpdateAsync(id, t);
         return true;
-    }
+    }*/
 
     public async Task<(int, int)> GetTestResult(int id, string[][] answers) => 
         await Task.Run(async () =>
@@ -59,7 +75,7 @@ public class TestService
             var test = await GetAsync(id);
             if (test is null)
                 return (0, 0);//TODO: cringe
-            return (await test.GetRightAnswerCount(answers),test.Count);
+            return (await test.GetRightAnswerCount(answers),test.QuestionsList.Count);
         }
     );
 }

@@ -5,6 +5,10 @@ namespace DPOBackend.Models;
 
 public class TestModel
 {
+    public TestModel()
+    {
+        
+    }
     public TestModel(TestRegistrationModel test)
     {
         Id = new Random(DateTime.Now.Millisecond).Next();//TODO: переделать
@@ -24,23 +28,15 @@ public class TestModel
             .ToList();
     }
 
-    [BsonId]
     public int Id{ get; set; }
     
-    [BsonElement("Name")]
     public string Name{ get; set; }
     
-    [BsonElement("Description")]
     public string Description{ get; set; }
     
-    [BsonElement("LinkedCoursesIds")]
     public List<int> LinkedCoursesIds{ get; set; }
     
-    [BsonElement("QuestionsList")]
     public List<Question> QuestionsList{ get; set; }
-
-    [BsonIgnore]
-    public int Count => QuestionsList.Count;
 
     public async Task<int> GetRightAnswerCount(string[][] answer) =>
         await Task.Run(() => 
@@ -58,7 +54,7 @@ public class TestModel
 
     
 
-    public void UpdateImageIds(ObjectId[] objectIds)
+    /*public void UpdateImageIds(ObjectId[] objectIds)
     {
         int i = 0;
         foreach (var question in QuestionsList.Where(q => q.ContentType == ContentType.Image))
@@ -67,5 +63,5 @@ public class TestModel
                 break;//TODO: exception хочеца
             question.ContentId = objectIds[i++];
         }
-    }
+    }*/
 }
