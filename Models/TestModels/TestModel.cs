@@ -1,4 +1,6 @@
-﻿using MongoDB.Bson;
+using BookStoreApi.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace DPOBackend.Models;
@@ -9,9 +11,9 @@ public class TestModel
     {
         
     }
-    public TestModel(TestRegistrationModel test)
+    public TestModel([FromServices] TestService service,TestRegistrationModel test)
     {
-        Id = new Random(DateTime.Now.Millisecond).Next();//TODO: переделать
+        Id = service.GetLenth().Result;
         Name = test.Name;
         Description = test.Description;
         LinkedCoursesIds = test.LinkedCoursesIds;

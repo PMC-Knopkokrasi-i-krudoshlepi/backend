@@ -17,21 +17,12 @@ public class MocController : ControllerBase
     [Authorize]
     public async Task<IActionResult> Current([FromServices] UserService service)
     {
-        var currentUser = GetCurrentUser(service);
-        return Ok(currentUser.Name);
+        var userId = HttpContext.User.FindFirst(ClaimTypes.Sid).Value;
+        var userName = HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+        
+        return Ok(new {Name = userName,Password = userId});
     }
 
-    private UserModel? GetCurrentUser(UserService service)
-    {
-        var identity = HttpContext.User.Identities as ClaimsIdentity;
-        if (identity != null)
-        {
-            var claims = identity.Claims;
-            return service.GetAsync(int.Parse(claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Sid)?.Value))
-                .Result;
-        }
-
-        return null;
-    }
+    
     
 }

@@ -71,13 +71,13 @@ public class TestService
         return true;
     }
 
-    public async Task<(int, int)> GetTestResult(int id, string[][] answers) => 
+    public async Task<(int, int)> GetTestResult(int id, string[][] answers) =>
         await Task.Run(async () =>
-        {
-            var test = await GetAsync(id);
-            if (test is null)
-                return (0, 0);//TODO: cringe
-            return (await test.GetRightAnswerCount(answers),test.QuestionsList.Count);
-        }
-    );
+            {
+                var test = await GetAsync(id);
+                if (test is null)
+                    return (0, 0); //TODO: cringe
+                return (await test.GetRightAnswerCount(answers), test.QuestionsList.Count);
+            }
+        );
 }
