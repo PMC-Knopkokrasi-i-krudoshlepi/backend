@@ -45,7 +45,7 @@ public class TestsController : ControllerBase
         return Ok(t.Id);
     }
     
-    /*[HttpPost("{id}/data")]
+    [HttpPost("{id}/data")]
     public async Task<IActionResult> LoadData(
         [FromServices] TestService testService,
         [FromServices] ImageService imageService,
@@ -56,5 +56,5 @@ public class TestsController : ControllerBase
         if (isSucced)
             return Ok();
         return NotFound();
-    }*/
+    }
 }

@@ -10,6 +10,8 @@ public class TestDbContext: DbContext
     public DbSet<Question> Questions { get; set; }
     
     public DbSet<UserModel> Users { get; set; }
+
+    public DbSet<ImageModel> Images { get; set; }
      
     public TestDbContext()
     {

@@ -22,7 +22,7 @@ public class TestModel
                     q.PossibleAnswers,
                     q.RightAnswers,
                     q.ContentType,
-                    ObjectId.Empty
+                    0
                 )
             )
             .ToList();
@@ -54,7 +54,7 @@ public class TestModel
 
     
 
-    /*public void UpdateImageIds(ObjectId[] objectIds)
+    public void UpdateImageIds(int[] objectIds)
     {
         int i = 0;
         foreach (var question in QuestionsList.Where(q => q.ContentType == ContentType.Image))
@@ -63,5 +63,5 @@ public class TestModel
                 break;//TODO: exception хочеца
             question.ContentId = objectIds[i++];
         }
-    }*/
+    }
 }

@@ -1,5 +1,8 @@
-﻿using DPOBackend.Models;
+﻿using System.Reflection.Metadata;
+using DPOBackend.Db;
+using DPOBackend.Models;
 using DPOBackend.Settings;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -9,40 +12,59 @@ namespace BookStoreApi.Services;
 
 public class ImageService
 {
-    IGridFSBucket gridFS;
+    public ImageService(){}
 
-    public ImageService(
-        IOptions<ImageServiceSettings> imageStoreDatabaseSettings)
+    public async Task<int> UploadFromStreamAsync(string fileFileName, Stream stream)
     {
-        var mongoClient = new MongoClient(
-            imageStoreDatabaseSettings.Value.ConnectionString);
+        int result;
+        var rawData = ReadFully(stream);
+        using (var ctx =  new TestDbContext())
+        {
+            var file = new ImageModel()
+            {
+                Id = new Random(DateTime.Now.Millisecond).Next(),
+                Name = fileFileName,
+                Data = rawData,
+                Size = rawData.Length
+            };
+            result = file.Id;
+            ctx.Images.Add(file);
+            await ctx.SaveChangesAsync();
+        }
 
-        var mongoDatabase = mongoClient.GetDatabase(
-            imageStoreDatabaseSettings.Value.DatabaseName);
-
-        gridFS = new GridFSBucket(mongoDatabase);
-    }
-
-    public async Task UploadFromStreamAsync(string fileFileName, Stream stream)
-    {
-        await gridFS.UploadFromStreamAsync(fileFileName, stream);
+        return result;
     }
     
-    public async Task<ObjectId[]> UploadFromStreamAsyncAndGetIds(IFormFileCollection collection)
+    public static byte[] ReadFully(Stream input)
     {
-        var ids = new ObjectId[collection.Count];
+        using (MemoryStream ms = new MemoryStream())
+        {
+            input.CopyTo(ms);
+            return ms.ToArray();
+        }
+    }
+    
+    public async Task<int[]> UploadFromStreamAsyncAndGetIds(IFormFileCollection collection)
+    {
+        var ids = new int[collection.Count];
         int i = 0;
         foreach (var file in collection)
         {
             await using var stream = file.OpenReadStream();
-            ids[i++] = await gridFS.UploadFromStreamAsync(file.FileName, stream);
+            ids[i++] = await UploadFromStreamAsync(file.FileName, stream);
         }
 
         return ids;
     }
 
-    public async Task DownloadToStreamAsync(ObjectId objectId, Stream stream)
+    public async Task DownloadToStreamAsync(int objectId, Stream stream)
     {
-        await gridFS.DownloadToStreamAsync(objectId, stream);
+        byte[] data;
+        using (var ctx = new TestDbContext())
+        {
+            data = ctx.Images.FirstOrDefault(img => img.Id == objectId)?.Data;
+        }
+
+        await stream.WriteAsync(data);
     }
 }

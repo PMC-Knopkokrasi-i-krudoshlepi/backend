@@ -13,13 +13,13 @@ public class Question
     {
         
     }
-    public Question(QuestionType argType, string[] argPossibleAnswers, string[] argRightAnswers, ContentType contentType, ObjectId objectId)
+    public Question(QuestionType argType, string[] argPossibleAnswers, string[] argRightAnswers, ContentType contentType, int objectId)
     {
         Type = argType;
         PossibleAnswers = argPossibleAnswers;
         RightAnswers = argRightAnswers;
-        /*ContentType = contentType;
-        ContentId = objectId;*/
+        ContentType = contentType;
+        ContentId = objectId;
     }
     
     public int Id { get; set; }
@@ -35,9 +35,9 @@ public class Question
     [BsonElement("RightAnswers")]
     public string[] RightAnswers{ get; set; }
     
-    /*[BsonElement("ContentType")]
+    [BsonElement("ContentType")]
     public ContentType ContentType { get; set; }
 
     [BsonElement("ContentId")]
-    public ObjectId ContentId{ get; set; }*/
+    public int ContentId{ get; set; }
 }

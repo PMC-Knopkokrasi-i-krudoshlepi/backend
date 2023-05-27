@@ -40,12 +40,14 @@ public class TestService
     }
     
 
-    public async Task UpdateAsync(int id, TestModel updatedBook){
+    public async Task UpdateAsync(int id, TestModel updatedTest){
         using (var ctx = new TestDbContext())
         {
-            var prev = await ctx.Tests.FirstOrDefaultAsync(t => t.Id == id);
-            ctx.Tests.Remove(prev);
-            ctx.Tests.Add(updatedBook);
+            /*var prev = await ctx
+                .Tests
+                .Include(t => t.QuestionsList)
+                .FirstOrDefaultAsync(t => t.Id == id);*/
+            ctx.Tests.Update(updatedTest);
             await ctx.SaveChangesAsync();
         }
     }
@@ -59,7 +61,7 @@ public class TestService
         }
     }
 
-    /*public async Task<bool> TryUpdateImageIds(int id, ObjectId[] objectIds)
+    public async Task<bool> TryUpdateImageIds(int id, int[] objectIds)
     {
         var t = await GetAsync(id);
         if (t is null)
@@ -67,7 +69,7 @@ public class TestService
         t.UpdateImageIds(objectIds);
         await UpdateAsync(id, t);
         return true;
-    }*/
+    }
 
     public async Task<(int, int)> GetTestResult(int id, string[][] answers) => 
         await Task.Run(async () =>

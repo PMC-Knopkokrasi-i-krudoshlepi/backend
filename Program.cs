@@ -16,6 +16,7 @@ builder.Services.AddSingleton<ImageService>();*/
 // Add services to the container.
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TestService>();
+builder.Services.AddScoped<ImageService>();
 builder.Services.AddMvc();
 
 builder.Services.AddControllers();
