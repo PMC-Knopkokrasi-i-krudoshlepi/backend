@@ -35,12 +35,18 @@ public class TestsController : ControllerBase
         });
     }
 
-    [HttpPost]
+    [HttpGet("all")]
+    public async Task<int[]> GetAllTestsIds([FromServices] TestService service)
+    {
+        return await service.GetAsync();
+    }
+
+    [HttpPost("create")]
     public async Task<IActionResult> CreateTest(
         [FromServices] TestService service,
         [FromBody] TestRegistrationModel test)
     {
-        var t = new TestModel(test);
+        var t = new TestModel(service,test);
         await service.CreateAsync(t);
         return Ok(t.Id);
     }
