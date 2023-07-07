@@ -11,23 +11,15 @@ namespace DPOBackend.Controllers;
 public class StaticResourcesController : ControllerBase
 {
     [HttpGet("{id}")]
-    public async Task GetResourceById([FromServices] ImageService service, [FromRoute] int id)
+    public async Task<IActionResult> GetResourceById([FromServices] ImageService service, [FromRoute] int id)
     {
         await service.DownloadToStreamAsync(id, HttpContext.Response.Body);
-        //return Ok();
+        return Ok();
     }
     
     [HttpPost]
     public async Task<IActionResult> PostResource([FromServices] ImageService service)
     {
-        /*foreach (var file in HttpContext.Request.Form.Files)
-        {
-            await using var stream = file.OpenReadStream();
-            var t = await service.UploadFromStreamAsync(file.FileName, stream);
-        }*/
-
-        var t = await service.UploadFromStreamAsyncAndGetIds(HttpContext.Request.Form.Files);
-
-        return Ok(t);
+        return Ok(await service.UploadFromStreamAsyncAndGetIds(HttpContext.Request.Form.Files));
     }
 }

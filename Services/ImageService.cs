@@ -22,7 +22,7 @@ public class ImageService
         {
             var file = new ImageModel()
             {
-                Id = new Random(DateTime.Now.Millisecond).Next(),
+                Id = new Random(DateTime.Now.Millisecond).Next(), //TODO: переделать
                 Name = fileFileName,
                 Data = rawData,
                 Size = rawData.Length

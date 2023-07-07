@@ -67,16 +67,26 @@ public class AccountController : ControllerBase
 
         return null;
     }
-
     
-
+    [Obsolete("Use GroupRegistration")]
     [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisttrationModel? urm, [FromServices] UserService service)
     {
-        var uid = (int) service.GetLenthAsync().Result + 1;
-        var user = new UserModel(uid, urm);
-        await service.CreateAsync(user); //TODO: TryCreate()
+        await service.CreateAsync(urm);
         return Ok();
+    }
+    
+    [HttpPost("registerGroup")]
+    public async Task GroupRegistration([FromServices] UserService service)
+    {
+        var mem = await service.GroupRegistration(HttpContext.Request.Form.Files);
+        // byte[] mas = mem.ToArray();
+        string file_type = "application/csv";
+        string file_name = "codes";
+        HttpContext.Response.Headers.Add("Content-Disposition", $"attachment; filename=\"{file_name}.csv\"");
+        await HttpContext.Response.Body.WriteAsync(mem.ToArray());
+        //return Ok();
+        //return File(mem, file_type, file_name);
     }
 }
