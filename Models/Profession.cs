@@ -1,7 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson.Serialization.Attributes;
 
+[PrimaryKey("Id")]
 public class Profession
 {
+    [BsonElement("Id")]
+    public int Id{ get; set; }
+    
     [BsonElement("Name")]
     public string Name{ get; set; }
     

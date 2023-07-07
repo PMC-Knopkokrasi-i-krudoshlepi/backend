@@ -13,8 +13,10 @@ public class Question
     {
         
     }
-    public Question(QuestionType argType, string[] argPossibleAnswers, string[] argRightAnswers, ContentType contentType, int objectId)
+    public Question(string name, string description, QuestionType argType, string[] argPossibleAnswers, string[] argRightAnswers, ContentType contentType, int objectId)
     {
+        Name = name;
+        Description = description;
         Type = argType;
         PossibleAnswers = argPossibleAnswers;
         RightAnswers = argRightAnswers;
@@ -23,6 +25,8 @@ public class Question
     }
     
     public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
 
     [BsonElement("Type")]
     [BsonRepresentation(BsonType.String)]

@@ -21,14 +21,11 @@ public class TestService
         {
             result = await ctx.Tests
                 .Include(test => test.QuestionsList)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(test => test.Id == id);
         }
 
         return result;
     }
-    
-    /*public async Task<TestModel?> GetAsyncWithoutAnswers(int id) =>
-        await _testsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();*/
 
     public async Task CreateAsync(TestModel newTest){
         using (var ctx = new TestDbContext())
@@ -43,10 +40,6 @@ public class TestService
     public async Task UpdateAsync(int id, TestModel updatedTest){
         using (var ctx = new TestDbContext())
         {
-            /*var prev = await ctx
-                .Tests
-                .Include(t => t.QuestionsList)
-                .FirstOrDefaultAsync(t => t.Id == id);*/
             ctx.Tests.Update(updatedTest);
             await ctx.SaveChangesAsync();
         }
@@ -80,4 +73,21 @@ public class TestService
                 return (await test.GetRightAnswerCount(answers), test.QuestionsList.Count);
             }
         );
+
+    public int GetLenth()
+    {
+        using var ctx = new TestDbContext();
+        return ctx.Tests.Count();
+    }
+
+    public async Task<int[]> GetAsyncAll()
+    {
+        int[] result;
+        using (var ctx = new TestDbContext())
+        {
+            result = ctx.Tests.Select(test => test.Id).ToArray();
+        }
+
+        return result;
+    }
 }

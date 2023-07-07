@@ -38,7 +38,7 @@ public class TestsController : ControllerBase
     [HttpGet("all")]
     public async Task<int[]> GetAllTestsIds([FromServices] TestService service)
     {
-        return await service.GetAsync();
+        return await service.GetAsyncAll();
     }
 
     [HttpPost("create")]

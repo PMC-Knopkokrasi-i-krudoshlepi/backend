@@ -12,7 +12,8 @@ public class TestDbContext: DbContext
     public DbSet<UserModel> Users { get; set; }
 
     public DbSet<ImageModel> Images { get; set; }
-     
+    public DbSet<Profession> Professions { get; set; }
+
     public TestDbContext()
     {
         Database.EnsureCreated();

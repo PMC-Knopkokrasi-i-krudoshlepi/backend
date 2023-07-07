@@ -9,9 +9,15 @@ public class QuestionToFront
 {
     public QuestionToFront(Question question)
     {
+        Name = question.Name;
+        Description = question.Description;
         Type = question.Type;
         PossibleAnswers = question.PossibleAnswers;
     }
+    
+    public string Name{ get; set; }
+    
+    public string Description{ get; set; }
     
     [BsonRepresentation(BsonType.String)]
     [JsonConverter(typeof(StringEnumConverter))]

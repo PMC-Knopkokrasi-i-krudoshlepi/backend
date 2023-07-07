@@ -13,13 +13,15 @@ public class TestModel
     }
     public TestModel([FromServices] TestService service,TestRegistrationModel test)
     {
-        Id = service.GetLenth().Result;
+        Id = service.GetLenth() + 1;
         Name = test.Name;
         Description = test.Description;
         LinkedCoursesIds = test.LinkedCoursesIds;
         QuestionsList = test.QuestionsList
             .Select(q => 
                 new Question(
+                    q.Name,
+                    q.Description,
                     q.Type,
                     q.PossibleAnswers,
                     q.RightAnswers,
