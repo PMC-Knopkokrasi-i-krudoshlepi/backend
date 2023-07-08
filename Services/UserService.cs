@@ -41,7 +41,7 @@ public class UserService
         int uid;
         using (var ctx = new TestDbContext())
         {
-            uid = await ctx.Users.CountAsync() + 1;
+            uid = await ctx.Users.CountAsync() + 1; //TODO: переделать
             var newUser = new UserModel(uid, urm);
             ctx.Users.Add(newUser);
             await ctx.SaveChangesAsync();
@@ -75,6 +75,16 @@ public class UserService
         using (var ctx = new TestDbContext())
         {
             result = await ctx.Users.FirstOrDefaultAsync(user => user.Name == name && user.Password == password);
+        }
+        return result;
+    }
+    
+    public async Task<UserModel?> GetByCode(string code)
+    {
+        UserModel? result;
+        using (var ctx = new TestDbContext())
+        {
+            result = await ctx.Users.FirstOrDefaultAsync(user => user.Code == code);
         }
         return result;
     }

@@ -34,6 +34,24 @@ public class AccountController : ControllerBase
 
         return NotFound("User not found");
     }
+    
+    [HttpGet("loginByCode")]
+    [Authorize(Roles = "Student")]
+    [EnableCors(policyName: "AllowAll")]
+    public async Task<IActionResult> LoginByCode(
+        [FromServices] UserService service,
+        [FromQuery] string code)
+    {
+        var user = Authenticate(service, code);
+        if (user != null)
+        {
+            var token = Generate(user);
+            return Ok(token);
+        }
+
+
+        return NotFound("User not found");
+    }
 
     private string Generate(UserModel user)
     {
@@ -68,6 +86,17 @@ public class AccountController : ControllerBase
         return null;
     }
     
+    private UserModel? Authenticate(UserService service, string code)
+    {
+        var user = service.GetByCode(code);
+        if (user.Result != null)
+        {
+            return user.Result;
+        }
+
+        return null;
+    }
+    
     [Obsolete("Use GroupRegistration")]
     [AllowAnonymous]
     [HttpPost("register")]
@@ -77,7 +106,7 @@ public class AccountController : ControllerBase
         return Ok();
     }
     
-    [HttpPost("registerGroup")]
+    [HttpPost("registerUserGroup")]
     public async Task GroupRegistration([FromServices] UserService service)
     {
         var mem = await service.GroupRegistration(HttpContext.Request.Form.Files);
