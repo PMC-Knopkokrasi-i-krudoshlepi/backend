@@ -20,7 +20,7 @@ public class AccountController : ControllerBase
     [HttpGet("login")]
     [EnableCors(policyName: "AllowAll")]
     public async Task<IActionResult> Login(
-         [FromServices] UserService service,
+        [FromServices] UserService service,
         [FromQuery] string username,
         [FromQuery] string password)
     {
@@ -81,12 +81,8 @@ public class AccountController : ControllerBase
     public async Task GroupRegistration([FromServices] UserService service)
     {
         var mem = await service.GroupRegistration(HttpContext.Request.Form.Files);
-        // byte[] mas = mem.ToArray();
-        string file_type = "application/csv";
-        string file_name = "codes";
-        HttpContext.Response.Headers.Add("Content-Disposition", $"attachment; filename=\"{file_name}.csv\"");
+        HttpContext.Response.Headers.Add("Content-Type", "text/csv");
+        HttpContext.Response.Headers.Add("Content-Disposition", "attachment; filename=\"codes.csv\"");
         await HttpContext.Response.Body.WriteAsync(mem.ToArray());
-        //return Ok();
-        //return File(mem, file_type, file_name);
     }
 }

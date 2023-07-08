@@ -8,9 +8,8 @@ public class UserRegisttrationModel
     }
 
     public string Name{ get; set; }
-    
+    public string Surname { get; set; }
     public string Password{ get; set; }
-    
     public UserRole Role{ get; set; }
 
     public UserRegisttrationModel(int id, string name, string password, UserRole role)
