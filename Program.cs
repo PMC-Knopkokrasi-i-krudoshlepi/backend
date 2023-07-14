@@ -19,6 +19,7 @@ builder.Services.AddScoped<TestService>();
 builder.Services.AddScoped<ImageService>();
 builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<ProfessionService>();
+builder.Services.AddScoped<CourseService>();
 builder.Services.AddMvc();
 
 builder.Services.AddControllers();
