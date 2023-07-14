@@ -1,4 +1,5 @@
 ﻿using DPOBackend.Models;
+using DPOBackend.Models.Identity;
 using DPOBackend.Models.UserModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,7 @@ public class TestDbContext: DbContext
 
     public DbSet<ImageModel> Images { get; set; }
     public DbSet<Profession> Professions { get; set; }
+    public DbSet<IdentityType> Identities { get; set; }
 
     public TestDbContext()
     {

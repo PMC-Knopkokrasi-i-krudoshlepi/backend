@@ -17,6 +17,7 @@ builder.Services.AddSingleton<ImageService>();*/
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TestService>();
 builder.Services.AddScoped<ImageService>();
+builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<ProfessionService>();
 builder.Services.AddMvc();
 
