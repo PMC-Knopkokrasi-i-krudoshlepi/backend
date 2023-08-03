@@ -35,8 +35,8 @@ public class TestsController : ControllerBase
         });
     }
 
-    [HttpGet("all")]
-    public async Task<int[]> GetAllTestsIds([FromServices] TestService service)
+    [HttpGet("getAll")]
+    public async Task<TestModel[]> GetAllTestsIds([FromServices] TestService service)
     {
         return await service.GetAsyncAll();
     }

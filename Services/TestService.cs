@@ -80,12 +80,12 @@ public class TestService
         return ctx.Tests.Count();
     }
 
-    public async Task<int[]> GetAsyncAll()
+    public async Task<TestModel[]> GetAsyncAll()//TODO: переписать
     {
-        int[] result;
+        TestModel[] result;
         using (var ctx = new TestDbContext())
         {
-            result = ctx.Tests.Select(test => test.Id).ToArray();
+            result = ctx.Tests.ToArray();
         }
 
         return result;
